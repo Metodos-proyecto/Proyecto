@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="twitter:card" content="summary" />
+    <meta name="description" content="Conversor de números online. Convertir bases numéricas: binario, octal, decimal y hexadecimal">
+    <title>Conversor de Sistemas Numéricos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://vuejs.org/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div class="section" style="background-color:rgb(196 242 247)">
+        <div id="app" class="container is-fluid">
+            <div class="columns">
+
+                <div class="column">
+				<p><img src="ima/UTPLogo.jpg" alt="image"  align="left"></p>
+				<p><img src="ima/Facultad.jpg" alt="image"  align="right"></p>
+				<br><br>		
+					<div align="center">	
+						<h1 class="is-size-2"><strong>Proyecto Final de Métodos Numéricos</strong></h1>
+						<h3 class="is-size-3"><strong>Conversor de Sistemas Numéricos</strong></h1>
+						<h4 class="is-size-4"><strong>Profesor: Ing. Nicholas Béliz Osorio, Mc.</strong></h4>
+					</div>
+                    <div v-show="!mostrarNotificacion" class="notification is-warning" style="background-color:#209cee">
+						Los <strong>métodos numéricos</strong> son de <strong>gran importancia</strong> en prácticamente todas las ramas de la ingeniería,
+						y debido a esto, es de gran importancia conocerlos con el objetivo de optimizar nuestros
+						tiempos de trabajo y cumplir con nuestros objetivos con menor dificultad.<br><br>
+						
+						En este proyecto, usando un código escrito por nosotros en <strong>HTML</strong> y <strong>JavaScript</strong>, nos dispusimos a crear 
+						un programa tal, que al ingresar un número en cualquier sistema numérico, nos arrojase su
+						equivalente en los demás sistemas numéricos estudiados.<br><br>
+						
+						Estas operaciones las realiza automáticamente el ordenador cuando este realiza un cálculo interno, 
+						pero es de vital importancia conocer cómo se realizan estas operaciones aritméticas para así
+						poder entender la metodología del ordenador al realizar las conversiones.<br><br>
+						
+                        Este <strong>conversor de bases numéricas</strong> puede convertir entre decimal, binario,
+                        octal y
+                        hexadecimal a cualquier otra base
+                        Escribe el número, selecciona la <strong>base</strong> y la conversión
+                        se hará automáticamente. (<strong>Nota:</strong> No se tomarán en cuenta para las conversiones valores que no se encuentren definidos
+						dentro del sistema numérico del dígito a ingresar. Tampoco se tomarán en cuenta valores decimales para las conversiones.)<br><br>
+						
+						Por último, no olvides visitar nuestra  <a target="" href="index.html">Calculadora de Valores Resistivos</a> y nuestra 
+						<a target="" href="calculadora.html">Calculadora Simple</a>.
+                    </div>
+
+                    <div v-show="mostrarNotificacion" class="notification is-info">
+                        Copiado al portapapeles <i class="fa fa-check"></i>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input v-model="numero" autofocus class="input" type="text" placeholder="El número que deseas convertir">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <p><strong>Convertir desde...</strong></p>
+                            <label class="radio">
+                                <input v-model="baseSeleccionada" value="2" type="radio" name="tipoConversion">
+                                Binario
+                            </label>
+                            <label class="radio">
+                                <input v-model="baseSeleccionada" value="8" type="radio" name="tipoConversion">
+                                Octal
+                            </label>
+                            <label class="radio">
+                                <input v-model="baseSeleccionada" value="10" type="radio" name="tipoConversion">
+                                Decimal
+                            </label>
+                            <label class="radio">
+                                <input v-model="baseSeleccionada" value="16" type="radio" name="tipoConversion">
+                                Hexadecimal
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field has-addons" >
+                        <div class="control">
+                            <a class="button is-success" style="background-color:#3273dc" >
+                                BINARIO
+                            </a>
+                        </div>
+                        <div class="control is-expanded" >
+                            <input v-model="binario" readonly class="input" type="text" placeholder="Aquí aparecerá el número ingresado en binario">
+                        </div>
+                        <div class="control">
+                            <a title="Copiar al portapapeles" @click="copiarAlPortapapeles(binario)" class="button is-info">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="field has-addons">
+
+                        <div class="control">
+                            <a class="button is-success" style="background-color:#3273dc">
+                                OCTAL
+                            </a>
+                        </div>
+                        <div class="control is-expanded">
+                            <input v-model="octal" readonly class="input" type="text" placeholder="Aquí aparecerá el número ingresado en octal">
+                        </div>
+                        <div class="control">
+                            <a @click="copiarAlPortapapeles(octal)" class="button is-info">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="field has-addons">
+
+                        <div class="control">
+                            <a class="button is-success" style="background-color:#3273dc">
+                                DECIMAL
+                            </a>
+                        </div>
+                        <div class="control is-expanded">
+                            <input v-model="decimal" readonly class="input" type="text" placeholder="Aquí aparecerá el número ingresado en decimal">
+                        </div>
+                        <div class="control">
+                            <a @click="copiarAlPortapapeles(decimal)" class="button is-info">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="field has-addons">
+
+                        <div class="control">
+                            <a class="button is-success" style="background-color:#3273dc">
+                                HEXADECIMAL
+                            </a>
+                        </div>
+                        <div class="control is-expanded">
+                            <input v-model="hexadecimal" readonly class="input" type="text" placeholder="Aquí aparecerá el número ingresado en hexadecimal">
+                        </div>
+                        <div class="control">
+                            <a @click="copiarAlPortapapeles(hexadecimal)" class="button is-info">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Conversor de sistemas numéricos online</strong> creado y mantenido por los siguientes estudiantes del grupo 1EE121:<br>
+						<strong>Nombre:</strong> José Aparicio <strong>Cédula:</strong> 8-932-1588 <br>
+						<strong>Nombre:</strong> Rebeca Barrios <strong>Cédula:</strong> 8-967-1193<br>
+						<strong>Nombre:</strong> Cristela Causadías <strong>Cédula:</strong> 8-967-1888<br>
+						<strong>Nombre:</strong> José Cerrud <strong>Cédula:</strong> 4-811-359 <br>
+						<strong>Nombre:</strong> Esteban Rua <strong>Cédula:</strong> 20-14-4693<br>
+            </p>
+        </div>
+    </footer>
+</body>
+<script src="js/scriptconvert.js"></script>
+
+</html>

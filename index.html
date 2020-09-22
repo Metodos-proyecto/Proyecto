@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Resistencias</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='css/bootstrap.css'>
+    <link rel="stylesheet" href="css/style.css">
+    <script src='js/angular.js'></script>
+    <script src='js/contextMenu.js'></script>
+    <script src="js/index.js"></script>
+</head>
+<body>
+
+
+
+<div class="section" style="background-color:#5ecca1">
+		<div id="app" class="container is-fluid">
+			<div class="container-fluid" ng-app="resistencias">
+		<div ng-controller="controlador">
+		<p><img src="ima/UTPLogo.jpg" alt="image"  align="left"></p>
+		<p><img src="ima/Facultad.jpg" alt="image"  align="right"></p>
+
+        <div class="row">
+
+			<div align="center">			
+				<h1 class="is-size-2"><strong>Proyecto Final de Métodos Numéricos</strong></h1>
+				<h3 class="is-size-3"><strong>Calculadora de Resistencias</strong></h1>
+				<h4 class="is-size-4"><strong>Profesor: Ing. Nicholas Béliz Osorio, Mc.</strong></h4>
+			</div>
+
+			<div class="col-xs-12">
+                <div class="alert alert-success">
+                 
+                    <div v-show="!mostrarNotificacion" class="notification is-warning" 
+						Los <strong>Los métodos numéricos</strong> son de <strong>gran importancia</strong> en prácticamente todas las ramas de la ingeniería,
+						y debido a esto, es de gran importancia conocerlos con el objetivo de optimizar nuestros
+						tiempos de trabajo y cumplir con nuestros objetivos con menor dificultad.<br><br>
+						
+						En este proyecto, usando un código escrito por nosotros en <strong>HTML</strong> y <strong>JavaScript</strong> , nos dispusimos a crear 
+						una calculadora de valores resistivos.<br><br>
+						
+						La metodología consiste en hacerle click a los cuadros de colores inferiores para cambiar el color de los mismos. La primera y segunda banda
+						corresponden a los dos primeros dígitos de nuestra resistencia, la tercera banda se refiere al multiplicador de la misma y la útlima
+						banda corresponde a la tolerancia de nuestro componente.<br><br>
+						
+                        Además de esto, esta <strong>calculadora de valores resistivos</strong> puede trabajar con distintos multiplicadores resistivos, ya sean estos
+						Ohms, Kilo Ohms, Mega Ohms, etc. <br><br>
+						
+						Por último, no olvides visitar nuestro  <a target="" href="conversion.html">Conversor de 
+						Sistemas Numéricos</a> y nuestra <a target="" href="calculadora.html">Calculadora
+						Simple</a>.
+						</div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-12">
+				<div class="column">
+					<div class="resistencia  text-center">
+						<div ng-repeat="banda in bandas" context-menu-on="click" context-menu="opcionesColores"
+							 class="cursor-de-manita banda {{banda.color}}"><h3>{{banda.etiqueta}}</h3></div>
+					</div>
+				</div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="unidades">Multiplicador de la Unidad:</label>
+                    <select id="unidades" class="form-control"
+                            ng-options="unidad as unidad.etiqueta for unidad in unidades track by unidad.id"
+                            ng-model="unidadSeleccionada"></select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive"> 
+                    <table class="table table-bordered table-condensed"  style="background-color:#f5f5f5">
+                        <tbody>
+                        <tr>
+                            <td><strong>Resistencia</strong></td>
+                            <td>{{resistencia | number:10}} {{unidadSeleccionada.etiqueta}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tolerancia</strong></td>
+                            <td>{{tolerancia | number:10}} {{unidadSeleccionada.etiqueta}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Valor mínimo</strong></td>
+                            <td>{{valorMinimoResistencia | number:10}} {{unidadSeleccionada.etiqueta}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Valor máximo</strong></td>
+                            <td>{{valorMaximoResistencia | number:10}} {{unidadSeleccionada.etiqueta}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                         
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+		</div>
+</div>	
+
+	<footer class="footer">
+		<div class="content has-text-centered" align="center" >
+			<p>
+				<strong>Conversor de sistemas numéricos online</strong> creado y mantenido por los siguientes estudiantes del grupo 1EE121:<br>
+				<strong>Nombre:</strong> José Aparicio <strong>Cédula:</strong> 8-932-1588 <br>
+				<strong>Nombre:</strong> Rebeca Barrios <strong>Cédula:</strong> 8-967-1193<br>
+				<strong>Nombre:</strong> Cristela Causadías <strong>Cédula:</strong> 8-967-1888<br>
+				<strong>Nombre:</strong> José Cerrud <strong>Cédula:</strong> 4-811-359 <br>
+				<strong>Nombre:</strong> Esteban Rua <strong>Cédula:</strong> 20-14-4693<br>
+			</p>
+		</div>
+	</footer>
+
+</body>
+</html>
